@@ -6,6 +6,7 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'validations' do
+    it { is_expected.to validate_presence_of :is_paid }
     it { is_expected.to validate_presence_of :customer_id }
     it { is_expected.to validate_presence_of :total }
   end
