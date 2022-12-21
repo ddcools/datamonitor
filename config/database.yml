@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV['POSTGRESQL_USER_NAME'] %>
+  password: <%= ENV['POSTGRESQL_PASSWORD'] %>
+  host: <%= ENV['POSTGRESQL_HOST'] %>
+  pool: <%= ENV['DB_POOL'] || ENV['RAILS_MAX_THREADS'] || 5 %>
+  timeout: 30000
+
+development:
+  primary: 
+    <<: *default
+    database: data_monitor_dev
+
+test:
+  primary:
+    <<: *default
+    database: data_monitor_test
