@@ -1,16 +1,10 @@
-# ActiveRecord::Base.connection_pool.with_connection do |connection|
-#   begin
-#     connection.execute 'LISTEN invoices_changed'
+ActiveRecord::PostgresPubSub::Listener.listen('invoices_changed') do |listener|
+  listener.on_start do
+    Rails.logger.info 'Started Listening to the notifications'
+  end
 
-#     connection.raw_connection.wait_for_notify do |channel, _pid, payload|
-#       Rails.logger.info "Received a NOTIFY on channel #{channel}"
-#       InvoiceBatchNotifierJob.perform_now(payload)
-#     end
-#   ensure
-#     connection.execute 'UNLISTEN *'
-#   end
-# end
-
-# def connection
-#   ActiveRecord::Base.connection
-# end
+  listener.on_notify do
+    Rails.logger.info 'Received notifications'
+    InvoiceBatchNotifierJob.perform_now(payload)
+  end
+end
