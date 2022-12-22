@@ -10,27 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_21_063346) do
+ActiveRecord::Schema[7.0].define(version: 20_221_221_063_346) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "customers", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "city"
-    t.integer "pincode"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'customers', force: :cascade do |t|
+    t.string 'first_name'
+    t.string 'last_name'
+    t.string 'city'
+    t.integer 'pincode'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "invoices", force: :cascade do |t|
-    t.boolean "is_paid", default: false
-    t.bigint "customer_id"
-    t.integer "total", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_invoices_on_customer_id"
+  create_table 'invoices', force: :cascade do |t|
+    t.boolean 'is_paid', default: false
+    t.bigint 'customer_id'
+    t.integer 'total', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['customer_id'], name: 'index_invoices_on_customer_id'
   end
 
-  add_foreign_key "invoices", "customers"
+  add_foreign_key 'invoices', 'customers'
 end

@@ -1,0 +1,23 @@
+CREATE OR REPLACE FUNCTION notify_invoice_changes()
+RETURNS trigger AS $$
+BEGIN
+  PERFORM pg_notify(
+    'invoices_changed',
+    json_build_object(
+      'operation', TG_OP,
+      'record', row_to_json(NEW)
+    )::text
+  );
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER invoices_changed 
+    AFTER UPDATE 
+        ON invoices 
+  FOR EACH ROW 
+    EXECUTE PROCEDURE notify_invoice_changes();
+
+commit;

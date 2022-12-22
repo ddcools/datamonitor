@@ -1,25 +1,14 @@
 # README
+This application monitors and ensure that server application code runs any time that certain data in the database changes.
+Even if the change was directly made to the database.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+For this it runs a job to ensure that the invoice batch is updated.
 
-Things you may want to cover:
+In this, we are using a stored procedure to listen to any changes to the invoice table and trigger a notification whenever there is an update.
 
-* Ruby version
+Our application listens to a channel for any update and whenever it receives any update it triggers the background job.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+Stores procedure's path: public/stored_procedure.txt
 
 * ...
 # datamonitor
