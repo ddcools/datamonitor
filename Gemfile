@@ -12,7 +12,6 @@ gem 'stimulus-rails'
 gem 'turbo-rails'
 
 gem 'activerecord-postgres_pub_sub'
-gem 'async'
 gem 'bootsnap', require: false
 gem 'dotenv-rails'
 gem 'jbuilder'
@@ -33,6 +32,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'factory_bot_rails'
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
