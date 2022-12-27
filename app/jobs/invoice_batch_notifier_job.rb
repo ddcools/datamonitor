@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# InvoiceBatchNotifierJob
 class InvoiceBatchNotifierJob < ApplicationJob
   queue_as :default
 

@@ -21,3 +21,57 @@ CREATE TRIGGER invoices_changed
     EXECUTE PROCEDURE notify_invoice_changes();
 
 commit;
+
+*****************************************************************
+
+# ActiveRecord::Base.connection_pool.with_connection do |connection|
+#   begin
+#     Rails.logger.info "Started To listen for updates..."
+
+#     connection.execute 'LISTEN invoices_changed'
+
+#     connection.raw_connection.wait_for_notify do |channel, _pid, payload|
+#       Rails.logger.info "Received a NOTIFY on channel #{channel}"
+#       InvoiceBatchNotifierJob.perform_now(payload)
+#     end
+#   ensure
+#     # connection.execute 'UNLISTEN *'
+#   end
+# end
+
+# def connection
+#   ActiveRecord::Base.connection
+# end
+
+# def self.listen_to_creation(heartbeat_interval = 10)
+#   ActiveRecord::Base.connection_pool.with_connection do |connection|
+#     begin
+#       execute_query(connection, ["LISTEN invoices_changed"])
+#        loop do
+#         connection.raw_connection.wait_for_notify(heartbeat_interval) do |event, pid, id|
+
+#           InvoiceBatchNotifierJob.perform_now(id)
+
+#         end
+#         if Time.now - last_heartbeat >= heartbeat_interval
+#           yield({heartbeat: true})
+#          end
+#       end
+#     ensure
+#       execute_query(connection, ["UNLISTEN invoices_changed"])
+#     end
+#   end
+# end
+
+# ActiveRecord::Base.connection_pool.with_connection do |connection|
+#   conn = connection.instance_variable_get(:@connection)
+
+#   begin
+#     conn.async_exec 'LISTEN invoices_changed'
+#     conn.wait_for_notify do |_channel, _pid, payload|
+#       InvoiceBatchNotifierJob.perform_now(payload)
+#     end
+#   ensure
+#     conn.async_exec 'UNLISTEN *'
+#   end
+# end

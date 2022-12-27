@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
+# CreateNotifyOnInvoicesInsertTrigger
 class CreateNotifyOnInvoicesInsertTrigger < ActiveRecord::Migration[5.1]
-  TABLE_NAME = 'invoices'.freeze
-  NOTIFICATION_NAME = 'invoice'.freeze
-  TABLE_MODULE = ''.freeze
+  TABLE_NAME = 'invoices'
+  NOTIFICATION_NAME = 'invoice'
+  TABLE_MODULE = ''
 
   def up
     execute <<-SQL

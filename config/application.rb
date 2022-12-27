@@ -12,6 +12,9 @@ module Datamonitor
     config.load_defaults 7.0
     config.active_job.queue_adapter = :sidekiq
 
+    config.autoload_once_paths << "#{root}/app/models"
+    config.autoload_once_paths << "#{root}/app/jobs"
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

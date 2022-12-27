@@ -8,6 +8,10 @@ class Invoice < ApplicationRecord
 
   after_update :update_invoice_batch, if: -> { saved_change_total? }
 
+  def self.update_batch_invoice
+    InvoiceBatchNotifierJob.perform_now
+  end
+
   private
 
   def update_invoice_batch
