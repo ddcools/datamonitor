@@ -11,10 +11,7 @@ module Datamonitor
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.add_autoload_paths_to_load_path = false
     config.active_job.queue_adapter = :sidekiq
-    config.autoload_once_paths << "#{root}/app/models"
-    config.autoload_once_paths << "#{root}/app/jobs"
 
     # Configuration for the application, engines, and railties goes here.
     #

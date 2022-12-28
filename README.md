@@ -9,12 +9,14 @@ We are using the Stored procedure and `activerecord-postgres_pub_sub` gem to lis
 Rails code after initialization listens to a channel of Postgress for any updates. Whenever it receives any update it triggers the background job to make the Sync.
 
 Steps to set the Stored procedure.
-1. Open the postgress console
-2. Execute the stored procedure here.
-3. Now Try updating the total column Update invoices set total = 17 where id = 1;
-4. In the development.log you can see the logs
+1. Open a new terminal tab and run: `rake db_monitor:invoice_data_monitor`
+2. Open one more terminal window to view logs `tail -f log/development.log`
+3. Open the postgress console.
+4. Execute the stored procedure here.
+5. Now Try updating the total column Update invoices set total = 17 where id = 1;
+6. In the development.log you can see the logs.
 
-Stored procedure's path: public/stored_procedure.txt
+Stored procedure's path: `public/stored_procedure.txt`
 
 * ...
 # datamonitor
